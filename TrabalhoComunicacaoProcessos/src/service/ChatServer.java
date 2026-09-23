@@ -13,15 +13,12 @@ public class ChatServer {
             Socket cliente = server.accept();
             System.out.println("Cliente conectado: " + cliente.getInetAddress());
 
-            // Streams para objetos
             ObjectInputStream in = new ObjectInputStream(cliente.getInputStream());
             ObjectOutputStream out = new ObjectOutputStream(cliente.getOutputStream());
 
-            // Recebe objeto Mensagem
             Mensagem mensagem = (Mensagem) in.readObject();
             System.out.println("Recebido: " + mensagem.getTexto());
 
-            // Cria resposta e envia de volta
             Mensagem resposta = new Mensagem("Servidor recebeu: " + mensagem.getTexto());
             out.writeObject(resposta);
 
